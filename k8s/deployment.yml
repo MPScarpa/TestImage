@@ -1,0 +1,159 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: nginxdioporco
+  namespace: kubeproject
+  uid: 9a7c819f-bec2-4cdb-a41c-b51b18bc14f2
+  resourceVersion: '1429434'
+  generation: 3
+  creationTimestamp: '2023-03-29T12:50:09Z'
+  annotations:
+    deployment.kubernetes.io/revision: '1'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: apps/v1
+      time: '2023-03-29T12:50:09Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:spec:
+          f:progressDeadlineSeconds: {}
+          f:revisionHistoryLimit: {}
+          f:selector: {}
+          f:strategy:
+            f:rollingUpdate:
+              .: {}
+              f:maxSurge: {}
+              f:maxUnavailable: {}
+            f:type: {}
+          f:template:
+            f:metadata:
+              f:labels:
+                .: {}
+                f:app: {}
+            f:spec:
+              f:containers:
+                k:{"name":"nginxdioporco"}:
+                  .: {}
+                  f:image: {}
+                  f:imagePullPolicy: {}
+                  f:name: {}
+                  f:ports:
+                    .: {}
+                    k:{"containerPort":80,"protocol":"TCP"}:
+                      .: {}
+                      f:containerPort: {}
+                      f:protocol: {}
+                  f:resources:
+                    .: {}
+                    f:limits:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                    f:requests:
+                      .: {}
+                      f:cpu: {}
+                      f:memory: {}
+                  f:terminationMessagePath: {}
+                  f:terminationMessagePolicy: {}
+              f:dnsPolicy: {}
+              f:nodeSelector: {}
+              f:restartPolicy: {}
+              f:schedulerName: {}
+              f:securityContext: {}
+              f:terminationGracePeriodSeconds: {}
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2023-04-06T07:24:41Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:deployment.kubernetes.io/revision: {}
+        f:status:
+          f:availableReplicas: {}
+          f:conditions:
+            .: {}
+            k:{"type":"Available"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+            k:{"type":"Progressing"}:
+              .: {}
+              f:lastTransitionTime: {}
+              f:lastUpdateTime: {}
+              f:message: {}
+              f:reason: {}
+              f:status: {}
+              f:type: {}
+          f:observedGeneration: {}
+          f:readyReplicas: {}
+          f:replicas: {}
+          f:updatedReplicas: {}
+      subresource: status
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginxdioporco
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginxdioporco
+    spec:
+      containers:
+        - name: nginxdioporco
+          image: kuberegistry2023.azurecr.io/nginxdioporco:latest
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              cpu: '256'
+              memory: 11400G
+            requests:
+              cpu: '0'
+              memory: '0'
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+status:
+  observedGeneration: 3
+  replicas: 2
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  conditions:
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2023-03-29T12:50:14Z'
+      lastTransitionTime: '2023-03-29T12:50:09Z'
+      reason: NewReplicaSetAvailable
+      message: ReplicaSet "nginxdioporco-59fd559887" has successfully progressed.
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2023-04-06T07:24:41Z'
+      lastTransitionTime: '2023-04-06T07:24:41Z'
+      reason: MinimumReplicasAvailable
+      message: Deployment has minimum availability.
